@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:indah_fb/models/product.dart';
 import 'package:indah_fb/ui_screens/admin/ctrl.dart';
 
@@ -24,6 +25,31 @@ class _AdminInputState extends State<AdminInput> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            pickedImage == null
+                ? Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white10,
+                    ),
+                    height: 100,
+                    width: 100,
+                    child: const Center(child: Text('No Image')),
+                  )
+                : SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Image.network(pickedImage!.path),
+                  ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () async {
+                pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+                setState(() {});
+              },
+              child: const Text(
+                "pick image from galery",
+              ),
+            ),
+            const SizedBox(height: 20),
             TextField(
               controller: ctrl1,
               onChanged: (value) {
@@ -96,7 +122,7 @@ class _AdminInputState extends State<AdminInput> {
               ),
             ),
             const SizedBox(height: 10),
-            OutlinedButton(
+            ElevatedButton(
               onPressed: () async {
                 final valName = ctrl1.text;
                 final valDesc = ctrl3.text;
@@ -110,6 +136,7 @@ class _AdminInputState extends State<AdminInput> {
                   description: valDesc,
                   id: id,
                   createdAt: createdAt,
+                  imageUrl: await uploadImage(),
                 );
 
                 setState(() {

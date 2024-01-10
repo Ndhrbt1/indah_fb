@@ -10,6 +10,16 @@ class AdminDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Admin Detail'),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await deleteDoc(id);
+              // ignore: use_build_context_synchronously
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.delete),
+          ),
+        ],
       ),
       body: Center(
         child: FutureBuilder(
@@ -19,6 +29,11 @@ class AdminDetail extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: Image.network(snapshot.data!.imageUrl),
+                  ),
                   Text(snapshot.data!.id),
                   Text(snapshot.data!.name),
                   Text("Rp: ${snapshot.data!.price}"),

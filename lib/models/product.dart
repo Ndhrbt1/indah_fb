@@ -5,12 +5,14 @@ class Product {
   final String name;
   final int price;
   final String description;
+  final String imageUrl;
   final String createdAt;
   Product({
     this.id = '',
     this.name = '',
     this.price = 0,
     this.description = '',
+    this.imageUrl = '',
     this.createdAt = '',
   });
 
@@ -19,6 +21,7 @@ class Product {
     String? name,
     int? price,
     String? description,
+    String? imageUrl,
     String? createdAt,
   }) {
     return Product(
@@ -26,6 +29,7 @@ class Product {
       name: name ?? this.name,
       price: price ?? this.price,
       description: description ?? this.description,
+      imageUrl: imageUrl ?? this.imageUrl,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -37,6 +41,7 @@ class Product {
     result.addAll({'name': name});
     result.addAll({'price': price});
     result.addAll({'description': description});
+    result.addAll({'image_url': imageUrl});
     result.addAll({'created_at': createdAt});
 
     return result;
@@ -48,6 +53,7 @@ class Product {
       name: map['name'] ?? '',
       price: map['price']?.toInt() ?? 0,
       description: map['description'] ?? '',
+      imageUrl: map['image_url'] ?? '',
       createdAt: map['created_at'] ?? '',
     );
   }
@@ -58,7 +64,7 @@ class Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, name: $name, price: $price, description: $description, createdAt: $createdAt)';
+    return 'Product(id: $id, name: $name, price: $price, description: $description, imageUrl: $imageUrl, createdAt: $createdAt)';
   }
 
   @override
@@ -70,11 +76,12 @@ class Product {
         other.name == name &&
         other.price == price &&
         other.description == description &&
+        other.imageUrl == imageUrl &&
         other.createdAt == createdAt;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ name.hashCode ^ price.hashCode ^ description.hashCode ^ createdAt.hashCode;
+    return id.hashCode ^ name.hashCode ^ price.hashCode ^ description.hashCode ^ imageUrl.hashCode ^ createdAt.hashCode;
   }
 }

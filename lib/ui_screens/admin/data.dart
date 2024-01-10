@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:indah_fb/models/product.dart';
 
 final ctrl1 = TextEditingController();
@@ -10,5 +11,9 @@ var isShowClear2 = false;
 var isShowClear3 = false;
 var selectedId = '';
 List<Product> productList = [];
-
 var isEnd = false;
+// * storge
+XFile? pickedImage;
+XFile? uploadPickedImage;
+
+var imageUrltoS = '';

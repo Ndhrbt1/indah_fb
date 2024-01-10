@@ -25,7 +25,7 @@ class Login extends StatelessWidget {
                   // ignore: use_build_context_synchronously
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Admin()),
+                    MaterialPageRoute(builder: (context) => const AdminList()),
                   );
                 },
                 child: const Text(
@@ -41,7 +41,7 @@ class Login extends StatelessWidget {
                   // ignore: use_build_context_synchronously
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Admin()),
+                    MaterialPageRoute(builder: (context) => const AdminList()),
                   );
                 },
                 child: const Text(

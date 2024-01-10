@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:indah_fb/ui_screens/admin/admin_detail.dart';
 import 'package:indah_fb/ui_screens/admin/admin_input.dart';
 import 'package:indah_fb/ui_screens/admin/ctrl.dart';
+import 'package:indah_fb/ui_screens/login/login.dart';
 
 import 'data.dart';
 
-class Admin extends StatefulWidget {
-  const Admin({super.key});
+class AdminList extends StatefulWidget {
+  const AdminList({super.key});
 
   @override
-  State<Admin> createState() => _AdminState();
+  State<AdminList> createState() => _AdminListState();
 }
 
-class _AdminState extends State<Admin> {
+class _AdminListState extends State<AdminList> {
   @override
   void initState() {
     addColToUserList();
@@ -43,6 +44,11 @@ class _AdminState extends State<Admin> {
                 ElevatedButton(
                   onPressed: () async {
                     await FirebaseAuth.instance.signOut();
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Login()),
+                    );
                   },
                   child: const Text(
                     "Logout",
@@ -52,6 +58,11 @@ class _AdminState extends State<Admin> {
                 ElevatedButton(
                   onPressed: () async {
                     await FirebaseAuth.instance.currentUser!.delete();
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Login()),
+                    );
                   },
                   child: const Text(
                     "Delete Account",
@@ -66,41 +77,62 @@ class _AdminState extends State<Admin> {
         future: getCol(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Column(
-              children: [
-                ...List.generate(
-                  productList.length,
-                  (index) {
-                    return Card(
-                      child: ListTile(
-                        title: Text(productList[index].name),
-                        subtitle: Text(productList[index].id),
-                        onTap: () {
-                          setState(() {
-                            selectedId = productList[index].id;
-                          });
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AdminDetail(id: productList[index].id)),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                ),
-                isEnd
-                    ? const Text('end of list')
-                    : snapshot.connectionState == ConnectionState.waiting
-                        ? const CircularProgressIndicator()
-                        : OutlinedButton(
-                            onPressed: () {
-                              setState(() {
-                                addColToUserList();
-                              });
-                            },
-                            child: const Text('loadmore'),
+            if (productList.isEmpty) {
+              return const Center(
+                child: Text('Data is empty'),
+              );
+            }
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  ...List.generate(
+                    productList.length,
+                    (index) {
+                      return Card(
+                        child: ListTile(
+                          title: Text(productList[index].name),
+                          subtitle: Text(productList[index].id),
+                          leading: SizedBox(
+                            child: productList[index].imageUrl.isEmpty
+                                ? const SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: Text('No Image'),
+                                  )
+                                : SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: Image.network(productList[index].imageUrl),
+                                  ),
                           ),
-              ],
+                          onTap: () {
+                            setState(() {
+                              selectedId = productList[index].id;
+                            });
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => AdminDetail(id: productList[index].id)),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  isEnd
+                      ? const Center(child: Text('end of list'))
+                      : snapshot.connectionState == ConnectionState.waiting
+                          ? const CircularProgressIndicator()
+                          : ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  addColToUserList();
+                                });
+                              },
+                              child: const Text('loadmore'),
+                            ),
+                ],
+              ),
             );
           }
           return const Center(

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:indah_fb/models/product.dart';
 import 'package:indah_fb/ui_screens/admin/data.dart';
 
@@ -29,11 +31,13 @@ Future<void> createDoc(Product data) async {
   final docId = data.id;
   final nama = data.name;
   final createdAt = data.createdAt;
+  final imageUrl = data.imageUrl;
   await FirebaseFirestore.instance.collection('product').doc(docId).set(
     {
       'name': nama,
       'id': docId,
       'created_at': createdAt,
+      'image_url': imageUrl,
     },
   );
   await FirebaseFirestore.instance.collection('productDetail').doc(docId).set(data.toMap());
@@ -43,5 +47,28 @@ Future<void> createDoc(Product data) async {
 Future<Product> getDetail(String id) async {
   final result = await FirebaseFirestore.instance.collection('productDetail').doc(id).get();
   final detail = Product.fromMap(result.data() ?? {});
+
   return detail;
+}
+
+Future<void> deleteDoc(String docId) async {
+  await FirebaseFirestore.instance.collection('product').doc(docId).delete();
+  await FirebaseFirestore.instance.collection('productDetail').doc(docId).delete();
+
+  final index = productList.indexWhere((element) => element.id == docId);
+  productList.removeAt(index);
+}
+
+// * storage
+Future<String> uploadImage() async {
+  final imageName = pickedImage!.name;
+  final imageType = pickedImage!.mimeType;
+  final imageId = UniqueKey().toString();
+  final imageBytes = await pickedImage!.readAsBytes();
+  final task = await FirebaseStorage.instance.ref('$imageId $imageName').putData(
+        imageBytes,
+        SettableMetadata(contentType: imageType),
+      );
+  imageUrltoS = await task.ref.getDownloadURL();
+  return imageUrltoS;
 }
