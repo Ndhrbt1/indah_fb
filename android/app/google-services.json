@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "3679278244",
+    "project_id": "indah-fb",
+    "storage_bucket": "indah-fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3679278244:android:1d34129bb913348cf24231",
+        "android_client_info": {
+          "package_name": "com.example.indah_fb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOkn8_13XMtzcz8JIa2erc3Fnov3Xd1RQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
