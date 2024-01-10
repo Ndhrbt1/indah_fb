@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:indah_fb/ui_screens/login/login.dart';
+import 'package:indah_fb/ui_screens/admin/admin_list.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,7 +10,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       theme: ThemeData.dark(),
-      home: const Login(),
+      home: const Admin(),
+      // home: const Login(),
       // home: const Home(),
     );
   }
