@@ -15,5 +15,12 @@ var isEnd = false;
 // * storge
 XFile? pickedImage;
 XFile? uploadPickedImage;
-
 var imageUrltoS = '';
+// * Edit
+
+final ctrl1e = TextEditingController();
+final ctrl2e = TextEditingController();
+final ctrl3e = TextEditingController();
+var isShowClear1e = false;
+var isShowClear2e = false;
+var isShowClear3e = false;

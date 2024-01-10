@@ -1,19 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:indah_fb/ui_screens/admin/admin_edit.dart';
 import 'package:indah_fb/ui_screens/admin/ctrl.dart';
 
-class AdminDetail extends StatelessWidget {
+class AdminDetail extends StatefulWidget {
   const AdminDetail({super.key, required this.id});
   final String id;
 
   @override
+  State<AdminDetail> createState() => _AdminDetailState();
+}
+
+class _AdminDetailState extends State<AdminDetail> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AdminEdit(id: widget.id)),
+              );
+            },
+            child: const Icon(Icons.edit),
+          ),
+          const SizedBox(width: 10),
+          FloatingActionButton(
+            onPressed: () {
+              setState(() {});
+            },
+            child: const Icon(Icons.loop),
+          ),
+          const SizedBox(width: 10),
+        ],
+      ),
       appBar: AppBar(
         title: const Text('Admin Detail'),
         actions: [
           IconButton(
             onPressed: () async {
-              await deleteDoc(id);
+              await deleteDoc(widget.id);
               // ignore: use_build_context_synchronously
               Navigator.pop(context);
             },
@@ -23,7 +51,7 @@ class AdminDetail extends StatelessWidget {
       ),
       body: Center(
         child: FutureBuilder(
-          future: getDetail(id),
+          future: getDetail(widget.id),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(

@@ -44,6 +44,24 @@ Future<void> createDoc(Product data) async {
   productList.insert(0, data);
 }
 
+Future<void> editDoc(Product editData) async {
+  final docId = editData.id;
+  final nama = editData.name;
+  final createdAt = editData.createdAt;
+  final imageUrl = editData.imageUrl;
+  await FirebaseFirestore.instance.collection('product').doc(docId).set(
+    {
+      'name': nama,
+      'id': docId,
+      'created_at': createdAt,
+      'image_url': imageUrl,
+    },
+  );
+  await FirebaseFirestore.instance.collection('productDetail').doc(docId).set(editData.toMap());
+  final index = productList.indexWhere((element) => element.id == docId);
+  productList[index] = editData;
+}
+
 Future<Product> getDetail(String id) async {
   final result = await FirebaseFirestore.instance.collection('productDetail').doc(id).get();
   final detail = Product.fromMap(result.data() ?? {});
