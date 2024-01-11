@@ -5,9 +5,16 @@ import 'package:indah_fb/ui_screens/customer/customer_list.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
-class Login extends StatelessWidget {
+import 'package:simple_icons/simple_icons.dart';
+
+class Login extends StatefulWidget {
   const Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +28,11 @@ class Login extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
+              IconButton(
                 onPressed: () {
                   html.window.open('https://github.com/Ndhrbt1/indah_fb', 'new tab');
                 },
-                child: const Text(
-                  "Go to Github",
-                ),
+                icon: const Icon(SimpleIcons.github),
               ),
               const SizedBox(height: 20),
 
@@ -77,6 +82,7 @@ class Login extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+
               // ElevatedButton(
               //   onPressed: snapshot.data == null
               //       ? null
