@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:indah_fb/models/product.dart';
-import 'package:indah_fb/ui_screens/admin/ctrl.dart';
 
-import 'data.dart';
+import '../../dt_sources/ctrl.dart';
+import '../../dt_sources/data.dart';
 
 class AdminEdit extends StatefulWidget {
   const AdminEdit({super.key, required this.id});
@@ -132,6 +132,7 @@ class _AdminEditState extends State<AdminEdit> {
                     const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () async {
+                        // editPickedImage = pickedImage;
                         final valName = ctrl1e.text.isEmpty ? snapshot.data!.name : ctrl1e.text;
                         final valDesc = ctrl3e.text.isEmpty ? snapshot.data!.description : ctrl3e.text;
                         final valPrice = ctrl2e.text.isEmpty ? snapshot.data!.price : int.parse(ctrl2e.text);
@@ -144,8 +145,11 @@ class _AdminEditState extends State<AdminEdit> {
                           description: valDesc,
                           id: id,
                           createdAt: createdAt,
-                          imageUrl: pickedImage == null ? snapshot.data!.imageUrl : await uploadImage(),
+                          imageUrl: pickedImage == null ? snapshot.data!.imageUrl : await editImage(),
+
+                          // imageUrl: editPickedImage == null ? await uploadImage() : await editImage(),
                         );
+                        setState(() {});
                         setState(() {
                           isLoading = true;
                         });

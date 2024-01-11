@@ -14,8 +14,9 @@ List<Product> productList = [];
 var isEnd = false;
 // * storge
 XFile? pickedImage;
-XFile? uploadPickedImage;
+XFile? editPickedImage;
 var imageUrltoS = '';
+var imageFromDetail = '';
 // * Edit
 
 final ctrl1e = TextEditingController();

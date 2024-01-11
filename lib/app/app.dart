@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:indah_fb/ui_screens/admin/admin_detail.dart';
-import 'package:indah_fb/ui_screens/admin/admin_input.dart';
-import 'package:indah_fb/ui_screens/admin/admin_list.dart';
+
+// import 'package:indah_fb/ui_screens/home/home.dart';
+import 'package:indah_fb/ui_screens/login/login.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,8 +13,9 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       theme: ThemeData.dark(),
       // home: const AdminInput(),
-      home: const AdminList(),
-      // home: const Login(),
+      // home: const AdminList(),
+      // home: const CustomerList(),
+      home: const Login(),
       // home: const Home(),
     );
   }

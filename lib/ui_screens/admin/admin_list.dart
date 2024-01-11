@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:indah_fb/dt_sources/ctrl.dart';
 import 'package:indah_fb/ui_screens/admin/admin_detail.dart';
 import 'package:indah_fb/ui_screens/admin/admin_input.dart';
-import 'package:indah_fb/ui_screens/admin/ctrl.dart';
-import 'package:indah_fb/ui_screens/login/login.dart';
 
-import 'data.dart';
+import '../../dt_sources/data.dart';
 
 class AdminList extends StatefulWidget {
   const AdminList({super.key});
@@ -48,43 +46,32 @@ class _AdminListState extends State<AdminList> {
       ),
       appBar: AppBar(
         title: const Text('Admin Page'),
-        actions: [
-          StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) => Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    await FirebaseAuth.instance.signOut();
-                    // ignore: use_build_context_synchronously
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Login()),
-                    );
-                  },
-                  child: const Text(
-                    "Logout",
-                  ),
-                ),
-                const SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: () async {
-                    await FirebaseAuth.instance.currentUser!.delete();
-                    // ignore: use_build_context_synchronously
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Login()),
-                    );
-                  },
-                  child: const Text(
-                    "Delete Account",
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+        // actions: [
+        //   StreamBuilder(
+        //     stream: FirebaseAuth.instance.authStateChanges(),
+        //     builder: (context, snapshot) => Row(
+        //       mainAxisSize: MainAxisSize.min,
+        //       children: [
+        //         IconButton(
+        //             onPressed: () async {
+        //               await FirebaseAuth.instance.signOut();
+        //               // ignore: use_build_context_synchronously
+        //               Navigator.pop(context);
+        //             },
+        //             icon: const Icon(Icons.logout)),
+        //         const SizedBox(width: 10),
+        //         IconButton(
+        //             onPressed: () async {
+        //               await FirebaseAuth.instance.currentUser!.delete();
+        //               // ignore: use_build_context_synchronously
+        //               Navigator.pop(context);
+        //             },
+        //             icon: const Icon(Icons.remove_circle_outline)),
+        //         const SizedBox(width: 10),
+        //       ],
+        //     ),
+        //   ),
+        // ],
       ),
       body: FutureBuilder(
         future: getCol(),
@@ -103,6 +90,9 @@ class _AdminListState extends State<AdminList> {
                     (index) {
                       return Card(
                         child: ListTile(
+                          selected: selectedId == productList[index].id,
+                          tileColor: Colors.transparent,
+                          selectedTileColor: Colors.deepPurple,
                           title: Text(productList[index].name),
                           subtitle: Text(productList[index].id),
                           leading: SizedBox(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:indah_fb/models/product.dart';
-import 'package:indah_fb/ui_screens/admin/ctrl.dart';
 
-import 'data.dart';
+import '../../dt_sources/ctrl.dart';
+import '../../dt_sources/data.dart';
 
 class AdminInput extends StatefulWidget {
   const AdminInput({super.key});

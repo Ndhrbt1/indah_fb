@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:indah_fb/ui_screens/admin/admin_edit.dart';
-import 'package:indah_fb/ui_screens/admin/ctrl.dart';
+
+import '../../dt_sources/ctrl.dart';
 
 class AdminDetail extends StatefulWidget {
   const AdminDetail({super.key, required this.id});
@@ -65,6 +66,10 @@ class _AdminDetailState extends State<AdminDetail> {
                   Text(snapshot.data!.id),
                   Text(snapshot.data!.name),
                   Text("Rp: ${snapshot.data!.price}"),
+                  Text(
+                    snapshot.data!.description,
+                    textAlign: TextAlign.justify,
+                  ),
                 ],
               );
             }
