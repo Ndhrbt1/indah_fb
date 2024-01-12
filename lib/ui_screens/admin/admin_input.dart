@@ -26,18 +26,22 @@ class _AdminInputState extends State<AdminInput> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             pickedImage == null
-                ? Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white10,
+                ? Card(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white10,
+                      ),
+                      height: 100,
+                      width: 100,
+                      child: const Center(child: Text('No Image')),
                     ),
-                    height: 100,
-                    width: 100,
-                    child: const Center(child: Text('No Image')),
                   )
                 : SizedBox(
                     height: 100,
                     width: 100,
-                    child: Image.network(pickedImage!.path),
+                    child: Image.network(
+                      pickedImage!.path,
+                    ),
                   ),
             const SizedBox(height: 10),
             ElevatedButton(

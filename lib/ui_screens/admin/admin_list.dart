@@ -26,6 +26,7 @@ class _AdminListState extends State<AdminList> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
+            heroTag: '1',
             onPressed: () {
               Navigator.push(
                 context,
@@ -36,6 +37,7 @@ class _AdminListState extends State<AdminList> {
           ),
           const SizedBox(width: 10),
           FloatingActionButton(
+            heroTag: '2',
             onPressed: () {
               setState(() {});
             },
@@ -89,10 +91,11 @@ class _AdminListState extends State<AdminList> {
                     productList.length,
                     (index) {
                       return Card(
+                        surfaceTintColor: Colors.white,
                         child: ListTile(
                           selected: selectedId == productList[index].id,
                           tileColor: Colors.transparent,
-                          selectedTileColor: Colors.deepPurple,
+                          selectedTileColor: Colors.deepPurple.shade100,
                           title: Text(productList[index].name),
                           subtitle: Text(productList[index].id),
                           leading: SizedBox(

@@ -34,7 +34,7 @@ class _CustomerListState extends State<CustomerList> {
                     onPressed: () async {
                       await FirebaseAuth.instance.signOut();
                       // ignore: use_build_context_synchronously
-                      Navigator.pop(context);
+                      // Navigator.pop(context);
                     },
                     icon: const Icon(Icons.logout)),
                 const SizedBox(width: 10),
@@ -42,7 +42,7 @@ class _CustomerListState extends State<CustomerList> {
                     onPressed: () async {
                       await FirebaseAuth.instance.currentUser!.delete();
                       // ignore: use_build_context_synchronously
-                      Navigator.pop(context);
+                      // Navigator.pop(context);
                     },
                     icon: const Icon(Icons.remove_circle_outline)),
                 const SizedBox(width: 10),
@@ -80,6 +80,7 @@ class _CustomerListState extends State<CustomerList> {
                                 );
                               },
                               child: Card(
+                                surfaceTintColor: Colors.white,
                                 child: SizedBox(
                                   height: 150,
                                   width: 150,
@@ -94,9 +95,14 @@ class _CustomerListState extends State<CustomerList> {
                                           : SizedBox(
                                               height: 100,
                                               width: 100,
-                                              child: Image.network(productList[index].imageUrl),
+                                              child: Image.network(
+                                                productList[index].imageUrl,
+                                                fit: BoxFit.fill,
+                                              ),
                                             ),
-                                      Text(productList[index].name),
+                                      Text(
+                                        productList[index].name,
+                                      ),
                                       Text('Rp: ${productList[index].price.toString()}'),
                                     ],
                                   ),
@@ -120,6 +126,7 @@ class _CustomerListState extends State<CustomerList> {
                         //           ),
                       ],
                     ),
+                    const SizedBox(height: 10),
                     isEnd
                         ? const Center(child: Text('end of list'))
                         : snapshot.connectionState == ConnectionState.waiting

@@ -15,6 +15,15 @@ class AdminEdit extends StatefulWidget {
 
 class _AdminEditState extends State<AdminEdit> {
   @override
+  void initState() {
+    ctrl1e.text = selectedProduct!.name;
+    ctrl2e.text = selectedProduct!.price.toString();
+    ctrl3e.text = selectedProduct!.description;
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -25,22 +34,21 @@ class _AdminEditState extends State<AdminEdit> {
           future: getDetail(widget.id),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              // final ctrl1e = TextEditingController(text: snapshot.data?.name);
-              // final ctrl2e = TextEditingController(text: snapshot.data?.price.toString());
-              // final ctrl3e = TextEditingController(text: snapshot.data?.description);
               return Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     pickedImage == null
-                        ? Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.white10,
+                        ? Card(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: Colors.white10,
+                              ),
+                              height: 200,
+                              width: 200,
+                              child: Image.network(selectedProduct!.imageUrl),
                             ),
-                            height: 200,
-                            width: 200,
-                            child: Image.network(snapshot.data!.imageUrl),
                           )
                         : SizedBox(
                             height: 200,
@@ -134,8 +142,8 @@ class _AdminEditState extends State<AdminEdit> {
                       onPressed: () async {
                         // editPickedImage = pickedImage;
                         final valName = ctrl1e.text.isEmpty ? snapshot.data!.name : ctrl1e.text;
-                        final valDesc = ctrl3e.text.isEmpty ? snapshot.data!.description : ctrl3e.text;
                         final valPrice = ctrl2e.text.isEmpty ? snapshot.data!.price : int.parse(ctrl2e.text);
+                        final valDesc = ctrl3e.text.isEmpty ? snapshot.data!.description : ctrl3e.text;
                         final id = snapshot.data!.id;
                         final createdAt = snapshot.data!.createdAt;
 

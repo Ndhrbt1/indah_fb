@@ -71,6 +71,7 @@ Future<void> editDoc(Product editData) async {
 Future<Product> getDetail(String id) async {
   final result = await FirebaseFirestore.instance.collection('productDetail').doc(id).get();
   final detail = Product.fromMap(result.data() ?? {});
+  selectedProduct = detail;
 
   return detail;
 }

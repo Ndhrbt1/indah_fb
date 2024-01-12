@@ -19,7 +19,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('InkaFlorist'),
         centerTitle: true,
       ),
       body: StreamBuilder(
@@ -79,6 +79,18 @@ class _LoginState extends State<Login> {
                 },
                 child: const Text(
                   "Login by Google",
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              ElevatedButton(
+                onPressed: snapshot.data == null
+                    ? () async {
+                        await FirebaseAuth.instance.signInAnonymously();
+                      }
+                    : null,
+                child: const Text(
+                  "Sign in",
                 ),
               ),
               const SizedBox(height: 20),
