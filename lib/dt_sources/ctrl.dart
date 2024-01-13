@@ -70,10 +70,7 @@ Future<void> editDoc(Product editData) async {
 
 Future<Product> getDetail(String id) async {
   final result = await FirebaseFirestore.instance.collection('productDetail').doc(id).get();
-  final detail = Product.fromMap(result.data() ?? {});
-  selectedProduct = detail;
-
-  return detail;
+  return productDetail = Product.fromMap(result.data() ?? {});
 }
 
 Future<void> deleteDoc(String docId) async {
@@ -90,20 +87,6 @@ Future<String> uploadImage() async {
   final imageType = pickedImage!.mimeType;
   final imageId = UniqueKey().toString();
   final imageBytes = await pickedImage!.readAsBytes();
-  final task = await FirebaseStorage.instance.ref('$imageId $imageName').putData(
-        imageBytes,
-        SettableMetadata(contentType: imageType),
-      );
-  imageUrltoS = await task.ref.getDownloadURL();
-  return imageUrltoS;
-}
-
-Future<String> editImage() async {
-  editPickedImage = pickedImage;
-  final imageName = editPickedImage!.name;
-  final imageType = editPickedImage!.mimeType;
-  final imageId = UniqueKey().toString();
-  final imageBytes = await editPickedImage!.readAsBytes();
   final task = await FirebaseStorage.instance.ref('$imageId $imageName').putData(
         imageBytes,
         SettableMetadata(contentType: imageType),

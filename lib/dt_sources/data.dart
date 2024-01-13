@@ -11,7 +11,7 @@ var isShowClear2 = false;
 var isShowClear3 = false;
 var selectedId = '';
 List<Product> productList = [];
-Product? selectedProduct;
+Product? productDetail;
 var isEnd = false;
 // * storge
 XFile? pickedImage;

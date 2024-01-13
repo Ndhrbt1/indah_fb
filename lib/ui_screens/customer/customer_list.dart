@@ -33,16 +33,14 @@ class _CustomerListState extends State<CustomerList> {
                 IconButton(
                     onPressed: () async {
                       await FirebaseAuth.instance.signOut();
-                      // ignore: use_build_context_synchronously
-                      // Navigator.pop(context);
+                      debugPrint(FirebaseAuth.instance.currentUser.toString());
                     },
                     icon: const Icon(Icons.logout)),
                 const SizedBox(width: 10),
                 IconButton(
                     onPressed: () async {
                       await FirebaseAuth.instance.currentUser!.delete();
-                      // ignore: use_build_context_synchronously
-                      // Navigator.pop(context);
+                      debugPrint(FirebaseAuth.instance.currentUser.toString());
                     },
                     icon: const Icon(Icons.remove_circle_outline)),
                 const SizedBox(width: 10),

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:indah_fb/ui_screens/admin/admin_list.dart';
-import 'package:indah_fb/ui_screens/customer/customer_list.dart';
+
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
@@ -38,9 +38,6 @@ class _LoginState extends State<Login> {
 
               ElevatedButton(
                 onPressed: () async {
-                  // await FirebaseAuth.instance.signInAnonymously();
-
-                  // ignore: use_build_context_synchronously
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const AdminList()),
@@ -54,12 +51,6 @@ class _LoginState extends State<Login> {
               ElevatedButton(
                 onPressed: () async {
                   await FirebaseAuth.instance.signInAnonymously();
-
-                  // ignore: use_build_context_synchronously
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CustomerList()),
-                  );
                 },
                 child: const Text(
                   "Login Anonymous",
@@ -71,11 +62,6 @@ class _LoginState extends State<Login> {
                   final GoogleAuthProvider provider =
                       GoogleAuthProvider().setCustomParameters({'prompt': 'select_account'});
                   await FirebaseAuth.instance.signInWithPopup(provider);
-                  // ignore: use_build_context_synchronously
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CustomerList()),
-                  );
                 },
                 child: const Text(
                   "Login by Google",
@@ -83,17 +69,17 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 20),
 
-              ElevatedButton(
-                onPressed: snapshot.data == null
-                    ? () async {
-                        await FirebaseAuth.instance.signInAnonymously();
-                      }
-                    : null,
-                child: const Text(
-                  "Sign in",
-                ),
-              ),
-              const SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: snapshot.data == null
+              //       ? () async {
+              //           await FirebaseAuth.instance.signInAnonymously();
+              //         }
+              //       : null,
+              //   child: const Text(
+              //     "Sign in",
+              //   ),
+              // ),
+              // const SizedBox(height: 20),
 
               // ElevatedButton(
               //   onPressed: snapshot.data == null

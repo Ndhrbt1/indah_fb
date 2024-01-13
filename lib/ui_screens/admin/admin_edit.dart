@@ -16,9 +16,9 @@ class AdminEdit extends StatefulWidget {
 class _AdminEditState extends State<AdminEdit> {
   @override
   void initState() {
-    ctrl1e.text = selectedProduct!.name;
-    ctrl2e.text = selectedProduct!.price.toString();
-    ctrl3e.text = selectedProduct!.description;
+    ctrl1e.text = productDetail!.name;
+    ctrl2e.text = productDetail!.price.toString();
+    ctrl3e.text = productDetail!.description;
 
     super.initState();
   }
@@ -47,7 +47,7 @@ class _AdminEditState extends State<AdminEdit> {
                               ),
                               height: 200,
                               width: 200,
-                              child: Image.network(selectedProduct!.imageUrl),
+                              child: Image.network(productDetail!.imageUrl),
                             ),
                           )
                         : SizedBox(
@@ -140,7 +140,6 @@ class _AdminEditState extends State<AdminEdit> {
                     const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () async {
-                        // editPickedImage = pickedImage;
                         final valName = ctrl1e.text.isEmpty ? snapshot.data!.name : ctrl1e.text;
                         final valPrice = ctrl2e.text.isEmpty ? snapshot.data!.price : int.parse(ctrl2e.text);
                         final valDesc = ctrl3e.text.isEmpty ? snapshot.data!.description : ctrl3e.text;
@@ -153,11 +152,8 @@ class _AdminEditState extends State<AdminEdit> {
                           description: valDesc,
                           id: id,
                           createdAt: createdAt,
-                          imageUrl: pickedImage == null ? snapshot.data!.imageUrl : await editImage(),
-
-                          // imageUrl: editPickedImage == null ? await uploadImage() : await editImage(),
+                          imageUrl: await uploadImage(),
                         );
-                        setState(() {});
                         setState(() {
                           isLoading = true;
                         });
@@ -167,6 +163,8 @@ class _AdminEditState extends State<AdminEdit> {
                         });
                         ctrl1.clear();
                         ctrl2.clear();
+
+                        pickedImage = null;
                         // ignore: use_build_context_synchronously
                         Navigator.pop(context);
 
