@@ -27,8 +27,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      theme: ThemeData.dark(),
-      // theme: ThemeData.light(),
+      // theme: ThemeData.dark(),
+      theme: ThemeData.light(),
       // home: const AdminInput(),
       // home: const AdminList(),
       // home: const CustomerList(),

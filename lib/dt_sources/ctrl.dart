@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:indah_fb/models/product.dart';
 
 import 'data.dart';
@@ -76,18 +75,19 @@ Future<Product> getDetail(String id) async {
 Future<void> deleteDoc(String docId) async {
   await FirebaseFirestore.instance.collection('product').doc(docId).delete();
   await FirebaseFirestore.instance.collection('productDetail').doc(docId).delete();
+  await FirebaseStorage.instance.ref(docId).delete();
 
   final index = productList.indexWhere((element) => element.id == docId);
   productList.removeAt(index);
 }
 
 // * storage
-Future<String> uploadImage() async {
-  final imageName = pickedImage!.name;
+Future<String> uploadImage(String id) async {
+  // final imageName = pickedImage!.name;
   final imageType = pickedImage!.mimeType;
-  final imageId = UniqueKey().toString();
+  // final imageId = UniqueKey().toString();
   final imageBytes = await pickedImage!.readAsBytes();
-  final task = await FirebaseStorage.instance.ref('$imageId $imageName').putData(
+  final task = await FirebaseStorage.instance.ref(id).putData(
         imageBytes,
         SettableMetadata(contentType: imageType),
       );

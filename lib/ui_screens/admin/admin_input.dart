@@ -140,7 +140,7 @@ class _AdminInputState extends State<AdminInput> {
                   description: valDesc,
                   id: id,
                   createdAt: createdAt,
-                  imageUrl: await uploadImage(),
+                  imageUrl: await uploadImage(id),
                 );
 
                 setState(() {

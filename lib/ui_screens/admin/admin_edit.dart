@@ -152,7 +152,7 @@ class _AdminEditState extends State<AdminEdit> {
                           description: valDesc,
                           id: id,
                           createdAt: createdAt,
-                          imageUrl: await uploadImage(),
+                          imageUrl: await uploadImage(id),
                         );
                         setState(() {
                           isLoading = true;

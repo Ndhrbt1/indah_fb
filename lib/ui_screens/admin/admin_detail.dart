@@ -46,7 +46,7 @@ class _AdminDetailState extends State<AdminDetail> {
             onPressed: () async {
               await deleteDoc(widget.id);
               // ignore: use_build_context_synchronously
-              // Navigator.pop(context);
+              Navigator.pop(context);
             },
             icon: const Icon(Icons.delete),
           ),
